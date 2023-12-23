@@ -1,0 +1,40 @@
+body {
+	font-family: Arial, serif;
+	background: #f1f1f1;
+}
+
+/*Login*/
+#form-container {
+    background-color:white;
+    border: solid lightgray 1px;
+    border-radius: 5px 0 0 5px;
+}
+
+#form-info {
+	background-color: #000040;
+    border: solid lightgray 1px;
+    border-radius: 0 5px 5px 0;
+    color: white;
+    padding: 10% 0;
+}
+
+.center-content {
+	text-align: center;
+}
+
+#form-container a {
+	color: #000040;
+	text-decoration: none;
+}
+
+#form-container a:hover {
+	text-decoration: underline;
+}
+
+#form-container button {
+	border-radius: 10px;
+}
+
+.error {
+	color: red;
+}

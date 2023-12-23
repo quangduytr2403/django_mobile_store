@@ -1,0 +1,22 @@
+img {
+	width: 100%;
+}
+
+.price {
+	color: red;
+}
+
+#total-price {
+	color: #ff0000;
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+.popular-product {
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+
+.popular-product img {
+	width: 30%;
+}

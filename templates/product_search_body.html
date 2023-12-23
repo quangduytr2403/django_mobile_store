@@ -1,0 +1,79 @@
+{% load cart %}
+{% load range %}
+<div class="col-sm-9 col-12">
+    <div class="row">
+        {% for product in list_of_products %}
+            <div class="col-sm-4 col-6">
+                <div class="card-content mt-3">
+                    <input type="hidden" value="{{ product.id }}">
+                    <img src="{{ product.src }}" alt="product">
+                    <div class="ml-3">
+                        <p class="mt-2 mb-0 product-categories">{{ product.type }}</p>
+                        <p class="product-name">{{ product.name }}</p>
+                        <p class="mt-2 product-price">{{ product.price }} $</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% if list_of_products|length == 0 %}
+            <div class="col-12 center-content mt-3">No product found!</div>
+        {% endif %}
+    </div>
+    <div class="d-flex justify-content-center mt-5">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="{% url 'product_list' 1 %}">First</a></li>
+
+            {% if current_page != 1 %}
+                <li class="page-item"><a class="page-link" href="{% url 'product_list' current_page|add:'-1' %}">Previous</a>
+                </li>
+            {% else %}
+                <li class="page-item"><a class="page-link">Previous</a></li>
+            {% endif %}
+
+            {% for counter in total_page|get_range %}
+                {% if current_page != counter %}
+                    <li class="page-item"><a class="page-link" href="{% url 'product_list' counter %}">{{ counter }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item"><a class="page-link">{{ counter }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if current_page != total_page %}
+                <li class="page-item"><a class="page-link" href="{% url 'product_list' current_page|add:'1' %}">Next</a>
+                </li>
+            {% else %}
+                <li class="page-item"><a class="page-link">Next</a></li>
+            {% endif %}
+
+            <li class="page-item"><a class="page-link" href="{% url 'product_list' total_page %}">Last</a></li>
+        </ul>
+    </div>
+</div>
+<div class="col-sm-3 offset-sm-0 col-8 offset-2 mt-3">
+    <div class="card px-4">
+        <h4 class="mt-2">Shopping cart</h4>
+        <p id="cart">
+            <i class="fas fa-shopping-cart fa-2x"></i>
+            <span class="badge badge-pill badge-warning">
+                {{ cart | get_number_of_products_in_cart }} product(s)
+            </span>
+        <p>
+        <p class="mb-0">
+            <b>Total: </b>
+            <span id="total-price">
+                {{ cart | calculate_cart_amount }} $
+            </span>
+        </p>
+    </div>
+    <div class="card">
+        <h4 class="mt-2 ml-4">Popular products</h4>
+        {% for product in list_of_popular_products %}
+            <div class="popular-product">
+                <input type="hidden" value="{{ product.id }}">
+                <img src="{{ product.src }}" alt="product"/>
+                <span>{{ product.name }}</span>
+            </div>
+        {% endfor %}
+    </div>
+</div>

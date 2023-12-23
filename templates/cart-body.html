@@ -1,0 +1,71 @@
+{% load cart %}
+<div class="row mb-3">
+    <div class="col-12">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>No.</th>
+                <th>Product in cart: {{ cart | get_number_of_products_in_cart }}</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+                <th>Remove</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% with counter=0 %}
+                {% with cart_detail=cart|get_cart_detail %}
+                    {% for cart_product in cart_detail %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ cart_product.product.name }}</td>
+                            <td>{{ cart_product.product.price }} $</td>
+                            <td>
+                                <input class="form-control-sm quantity" type="number"
+                                       min="1" value="{{ cart_product.quantity }}" required>
+                            </td>
+                            <td>{{ cart_product | get_product_amount }} $</td>
+                            <td>
+                                <button type="button" class="btn btn-danger remove-button">
+                                    <i class="fas fa-trash fa-lg"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endwith %}
+            {% endwith %}
+            <tr>
+                <td colspan="6"><b>Total: {{ cart | calculate_cart_amount }} $</b></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-6 offset-sm-3 col-12">
+        <form action="{% url 'submit_order' %}" method="get">
+            <div class="form-group row">
+                <label for="customer_name" class="col-4"><b>Customer name</b></label>
+                <input type="text" name="customer_name" id="customer_name"
+                       class="form-control col-8 {% if customer_name_feedback %}is-invalid{% endif %}"
+                       value="{% if order.customer_name %}{{ order.customer_name }}{% else %}{{ user_login.name }}{% endif %}">
+                <p class="invalid-feedback col-8 offset-4">{{ customer_name_feedback }}</p>
+            </div>
+            <div class="form-group row">
+                <label for="customer_address" class="col-4"><b>Customer address</b></label>
+                <input type="text" name="customer_address" id="customer_address"
+                       class="form-control col-8 {% if customer_address_feedback %}is-invalid{% endif %}"
+                       value="{% if order.customer_address %}{{ order.customer_address }}{% else %}{{ user_login.address }}{% endif %}">
+                <p class="invalid-feedback col-8 offset-4">{{ customer_address_feedback }}</p>
+            </div>
+            <div class="form-group row">
+                <label for="discount" class="col-4"><b>Discount code (if any)</b></label>
+                <input type="text" name="discount" id="discount"
+                       class="form-control col-8 {% if discount_feedback %}is-invalid{% endif %}"
+                       value="{{ order.discount }}">
+                <p class="invalid-feedback col-8 offset-4">{{ discount_feedback }}</p>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-warning col-6 offset-3">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

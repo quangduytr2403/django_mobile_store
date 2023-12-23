@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'media/logo.png' %}" >
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="{% static 'css/register.css' %}"/>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-5 offset-1 col-md-3 offset-md-3 p-4" id="form-container">
+            <div>
+                <h2 class="center-content"><b>Register</b></h2>
+                <p class="error center-content">{{ register_fail }}</p>
+            </div>
+            <form action="{% url 'register' %}" method="post" id="form-register" class="pt-0 px-3">
+                 {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="user_mail" id="user_mail"
+                           class="form-control {% if user_mail_feedback %}is-invalid{% endif %}"
+                           placeholder="Email" value="{{ user_register.user_mail }}">
+                    <p class="invalid-feedback mb-0">{{ user_mail_feedback }}</p>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" id="password"
+                           class="form-control {% if password_feedback %}is-invalid{% endif %}"
+                           placeholder="Passwork" value="{{ user_register.password }}">
+                    <p class="invalid-feedback mb-0">{{ password_feedback }}</p>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="re_password" id="re_password"
+                           class="form-control  {% if re_password_feedback %}is-invalid{% endif %}"
+                           placeholder="Re-Password" value="{{ re_password }}">
+                    <p class="invalid-feedback mb-0">{{ re_password_feedback }}</p>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="name" id="name"
+                           class="form-control {% if name_feedback %}is-invalid{% endif %}"
+                           placeholder="Name" value="{{ user_register.name }}">
+                    <p class="invalid-feedback mb-0">{{ name_feedback }}</p>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="address" id="address"
+                           class="form-control {% if address_feedback %}is-invalid{% endif %}"
+                           placeholder="Address" value="{{ user_register.address }}">
+                    <p class="invalid-feedback mb-0">{{ address_feedback }}</p>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="phone" id="phone"
+                           class="form-control {% if phone_feedback %}is-invalid{% endif %}"
+                           placeholder="Phone" value="{{ user_register.phone }}">
+                    <p class="invalid-feedback mb-0">{{ phone_feedback }}</p>
+                </div>
+
+                <div class="center-content">
+                    <button type="submit" class="btn btn-primary mt-3 px-5"><b>REGISTER</b></button>
+                </div>
+                <div class="center-content mt-3">
+                    <a href="{% url 'login' %}">Already have account? Login with us</a>
+                </div>
+            </form>
+        </div>
+        <div class="col-5 col-md-3 center-content" id="form-info">
+            <h3><b>Register Ryan Mobile</b></h3>
+            <p>To connect with us <br> please register your personal info</p>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap 4 -->
+<script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<!-- Fontwesome 5 -->
+<script src="https://kit.fontawesome.com/a12342cbee.js"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+/*Card effect*/
+div.card-content {
+  background: #f5f5f5;
+  padding: 0.5em;
+  box-shadow: 3px 3px 8px hsl(0, 0%, 70%);
+}
+
+div.card-content img{
+  width: 100%;
+  height: auto;
+}
+
+div.card-content:hover {
+  opacity: 0.8;
+}
+
+div.card-content .product-categories {
+	color: #808080;
+	text-transform: uppercase;
+}
+
+div.card-content .product-name {
+	color: #0000a0;
+}
+
+div.card-content .product-price {
+	color: #ff0000;
+	font-weight: bold;
+}
+
+#total-price {
+	color: #ff0000;
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+.popular-product {
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+
+.popular-product img {
+	width: 30%;
+}
+ 
